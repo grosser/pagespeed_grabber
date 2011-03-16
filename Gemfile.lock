@@ -3,6 +3,11 @@ GEM
   specs:
     diff-lcs (1.1.2)
     fastercsv (1.5.4)
+    git (1.2.5)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
     mechanize (1.0.0)
       nokogiri (>= 1.2.1)
     nokogiri (1.4.4)
@@ -21,6 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   fastercsv
+  jeweler
   mechanize
   rake
   rspec (~> 2)

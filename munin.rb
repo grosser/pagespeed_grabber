@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'webpagetest_grabber'
+require 'pagespeed_grabber'
 
 test_url = File.dirname(__FILE__).split('_',2).last
 
@@ -14,13 +14,12 @@ if ARGV[0].to_s == 'config'
   puts "graph_scale no\n";
   puts "graph_category other\n";
 
-  WebpagetestGrabber::HEADERS.each do |header|
+  PagespeedGrabber::HEADERS.each do |header|
     puts "#{clean_name(header)}.label #{header}\n"
   end
 else
-  initial, repeated = WebpagetestGrabber.fetch(test_url)
+  initial, repeated = PagespeedGrabber.fetch(test_url)
   initial.each do |header, value|
     puts "#{clean_name(header)}.value #{value}"
   end
 end
-

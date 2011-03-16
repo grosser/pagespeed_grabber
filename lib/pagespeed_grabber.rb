@@ -3,10 +3,9 @@ require 'mechanize'
 require 'faster_csv'
 require 'timeout'
 
-module WebpagetestGrabber
+module PagespeedGrabber
   URL = 'http://www.webpagetest.org'
-
-  # page takes ~ 20s to generate
+  VERSION = File.read( File.join(File.dirname(__FILE__),'..','VERSION') ).strip
   DEFAULT_TIMEOUT = 100
   TIME_BETWEEN_TRIES = 10
   CSV_LINK = 'Raw page data'
@@ -14,7 +13,7 @@ module WebpagetestGrabber
 
   def self.fetch(test_url, options={})
     Timeout.timeout(options[:timeout]||DEFAULT_TIMEOUT) do
-      csv_to_array(download_csv(test_url, options))
+      csv_to_array(download_csv(test_url))
     end
   end
 
