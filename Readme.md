@@ -13,6 +13,8 @@ TODO
  - add other services
  - make less hacky/use official apis
  - generate initial AND repeated graph
+ - find a reliable service
+ - parse .har file from e.g. loads.in
 
 Authors
 =======
