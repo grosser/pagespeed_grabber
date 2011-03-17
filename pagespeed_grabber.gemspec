@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Grosser"]
-  s.date = %q{2011-03-16}
+  s.date = %q{2011-03-17}
   s.email = %q{michael@grosser.it}
   s.files = [
     "Gemfile",
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/pagespeed_grabber.rb",
     "munin.rb",
+    "pagespeed_grabber.gemspec",
     "spec/pagespeed_grabber_spec.rb"
   ]
   s.homepage = %q{http://github.com/grosser/pagespeed_grabber}
