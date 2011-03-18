@@ -6,7 +6,25 @@ Not ready for production just a toy project.
     data = PagespeedGrabber.fetch('google.com', :from => 'webpagetest', :timeout => 200)
 
 ### Munin
-`munin.rb` can be moved into munin/plugins and renamed to e.g. webpagetest_google.com to aggregate results.
+move [munin.rb](https://github.com/grosser/pagespeed_grabber/raw/master/munin.rb) into munin/plugins and renamed to e.g. webpagetest_google.com to aggregate results.
+
+    sudo su
+
+    gem install pagespeed_grabber
+    curl https://github.com/grosser/pagespeed_grabber/raw/master/munin.rb > /usr/shared/munin/plugins/pagespeed_grabber
+    chmod +x /usr/shared/munin/plugins/pagespeed_grabber
+
+    ls -s /usr/shared/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_google.com
+
+    ./etc/munin/plugins/webpagetest_google.com config    # check config works
+    ./etc/munin/plugins/webpagetest_google.com           # check values are returned
+
+    # insert into /etc/munin/plugin-conf.d/munin-node
+    [webpagetest_google.com]
+    timeout 100
+
+    /etc/init.d/munin-node.restart
+
 
 TODO
 ====

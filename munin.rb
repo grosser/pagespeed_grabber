@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/local/bin/ruby
 require 'rubygems'
 require 'pagespeed_grabber'
 
@@ -8,7 +8,11 @@ def clean_name(name)
   name.gsub(/[ \(\)]/,'_').downcase
 end
 
-headers = (PagespeedGrabber::HEADERS).sort
+not_reportable = [
+  'Date', 'Descriptor', 'Connection Type', 'Event GUID', 'Event Name', 'Event URL', 'Experimental', 'Host', 'IP Address', 'Lab ID',
+  'Includes Object Data', 'Max Simultaneous Flagged Connections', 'Pagetest Build', 'Time', 'URL', 'unused', 'Keep-Alive Score'
+]
+headers = (PagespeedGrabber::HEADERS - not_reportable).sort
 
 if ARGV[0].to_s == 'config'
   puts "graph_title #{test_url} Webpagetest\n";
