@@ -5,24 +5,29 @@ Not ready for production just a toy project.
 
     data = PagespeedGrabber.fetch('google.com', :from => 'webpagetest', :timeout => 200)
 
-### Munin
-move [munin.rb](https://github.com/grosser/pagespeed_grabber/raw/master/munin.rb) into munin/plugins and renamed to e.g. webpagetest_google.com to aggregate results.
+# Munin
 
+### Download
     sudo su
 
     gem install pagespeed_grabber
-    curl https://github.com/grosser/pagespeed_grabber/raw/master/munin.rb > /usr/shared/munin/plugins/pagespeed_grabber
-    chmod +x /usr/shared/munin/plugins/pagespeed_grabber
+    curl https://github.com/grosser/pagespeed_grabber/raw/master/munin.rb > /usr/share/munin/plugins/pagespeed_grabber
+    chmod +x /usr/share/munin/plugins/pagespeed_grabber
 
-    ls -s /usr/shared/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_google.com
+### Add data cron and run it once
+    */5 * * * * /usr/share/munin/plugins/pagespeed_grabber cache webpagetest google.com
 
-    ./etc/munin/plugins/webpagetest_google.com config    # check config works
-    ./etc/munin/plugins/webpagetest_google.com           # check values are returned
+### Add plugins for time, data, score, connections graphs
+    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_time_de.dawanda.com
+    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_data_de.dawanda.com
+    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_score_de.dawanda.com
+    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_connections_de.dawanda.com
 
-    # insert into /etc/munin/plugin-conf.d/munin-node
-    [webpagetest_google.com]
-    timeout 100
+### Check plugins work
+    ./etc/munin/plugins/webpagetest_time_google.com config    # config works
+    ./etc/munin/plugins/webpagetest_time_google.com           # values are returned
 
+### Restart
     /etc/init.d/munin-node.restart
 
 
