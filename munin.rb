@@ -38,9 +38,9 @@ if ARGV[0] == 'cache'
   data = PagespeedGrabber.fetch(url, :from => source)
   File.open(temp_file(source, url), 'w'){|f| f.write(data.to_yaml) }
 else
-  source, type, url = File.basename(__FILE__).split('_',3)
+  source, scope, type, url = File.basename(__FILE__).split('_',4)
   data = YAML.load_file(temp_file(source, url))
-  headers = select_headers(data.first.keys, type)
+  headers = select_headers(data.first.keys, scope)
 
   if ARGV[0] == 'config'
     label = {
@@ -48,9 +48,9 @@ else
       'time' => 'ms',
       'score' => '%',
       'connections' => 'number'
-    }[type]
+    }[scope]
 
-    puts "graph_title #{url} #{type} by #{source}"
+    puts "graph_title #{url} #{scope} #{type} by #{source}"
     puts "graph_vlabel #{label}"
     puts "graph_scale no"
     puts "graph_category pagespeed"
@@ -60,7 +60,8 @@ else
     end
   else
     initial, repeated = data
-    initial.sort.each do |header, value|
+    data = (type == 'repeated' ? repeated : initial)
+    data.sort.each do |header, value|
       next unless headers.include?(header) and is_numeric?(value)
       puts "#{clean_name(header)}.value #{value}"
     end

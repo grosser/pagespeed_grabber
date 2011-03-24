@@ -18,10 +18,8 @@ Not ready for production just a toy project.
     */5 * * * * /usr/share/munin/plugins/pagespeed_grabber cache webpagetest google.com
 
 ### Add plugins for time, data, score, connections graphs
-    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_time_de.dawanda.com
-    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_data_de.dawanda.com
-    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_score_de.dawanda.com
-    ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_connections_de.dawanda.com
+    ruby -e "%w[time data score connections].each{|s| %w[initial repeated].each{|t| %x{ln -s /usr/share/munin/plugins/pagespeed_grabber /etc/munin/plugins/webpagetest_#{s}_#{t}_google.com}  } }"
+
 
 ### Check plugins work
     ./etc/munin/plugins/webpagetest_time_google.com config    # config works
