@@ -20,7 +20,7 @@ def select_headers(headers, type)
   selector = {
     'time' => /Time/,
     'data' => /Bytes|Savings/,
-    'connections' => /DNS|Responses|Requests|Segments|Connections|Packet Loss/,
+    'connections' => /DNS|Responses|Requests|Connections|Packet Loss/,
     'score' => /Score/
   }[type] || raise('Unknown type')
 
