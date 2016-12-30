@@ -7,7 +7,7 @@ Not ready for production just a toy project.
 
 # Munin
 1 of 8 graphs generated via munin: Pagespeed score over 1 day for initial request:<br/>
-![score for initial reqest over 1 day](http://dl.dropbox.com/u/2670385/Web/pagespeed_grabber_example.png)
+![score for initial reqest over 1 day](assets/example.png?raw=true)
 
 
 ### Download
